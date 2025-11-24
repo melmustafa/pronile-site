@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pronile International Co. Ltd.</title>
+
+    <!-- Google Fonts: Cairo for Arabic, Inter for English -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              pronile: {
+                blue: "#1e3a8a", // Deep industrial blue
+                dark: "#0f172a",
+                gold: "#fbbf24", // Safety yellow/gold
+                light: "#f8fafc",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              arabic: ["Cairo", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Language specific font override */
+      :lang(ar) {
+        font-family: "Cairo", sans-serif;
+      }
+      :lang(en) {
+        font-family: "Inter", sans-serif;
+      }
+
+      /* Hero Overlay */
+      .hero-overlay {
+        background: linear-gradient(
+          rgba(15, 23, 42, 0.7),
+          rgba(15, 23, 42, 0.6)
+        );
+      }
+
+      .service-card {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 10px 25px -5px rgba(0, 0, 0, 0.1),
+          0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* SVG Icon Utilities */
+      .icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        stroke-width: 0;
+        stroke: currentColor;
+        fill: currentColor;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-800 antialiased">
+    <!-- Navigation -->
+    <nav
+      class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-md transition-all duration-300"
+      id="navbar"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <!-- Logo -->
+          <div class="flex-shrink-0 flex items-center">
+            <a
+              href="#"
+              class="text-2xl font-bold text-pronile-blue tracking-tighter uppercase flex items-center"
+            >
+              <!-- Icon: Globe/Earth -->
+              <svg
+                class="icon text-pronile-gold mr-2 rtl:ml-2 rtl:mr-0 w-8 h-8"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"
+                />
+                <path
+                  d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                />
+              </svg>
+              <span data-key="companyNameShort">PRONILE</span>
+            </a>
+          </div>
+
+          <!-- Desktop Menu -->
+          <div
+            class="hidden md:flex items-center space-x-8 rtl:space-x-reverse"
+          >
+            <a
+              href="#about"
+              class="text-slate-600 hover:text-pronile-blue font-medium transition-colors"
+              data-key="navAbout"
+              >About Us</a
+            >
+            <a
+              href="#services"
+              class="text-slate-600 hover:text-pronile-blue font-medium transition-colors"
+              data-key="navServices"
+              >Sectors</a
+            >
+            <a
+              href="#values"
+              class="text-slate-600 hover:text-pronile-blue font-medium transition-colors"
+              data-key="navValues"
+              >Values</a
+            >
+            <a
+              href="#contact"
+              class="px-5 py-2.5 rounded-md bg-pronile-blue text-white font-semibold hover:bg-blue-800 transition-colors shadow-sm"
+              data-key="navContact"
+              >Contact Us</a
+            >
+
+            <!-- Language Toggle -->
+            <button
+              onclick="toggleLanguage()"
+              class="flex items-center text-sm font-semibold text-slate-500 hover:text-pronile-blue border border-slate-300 rounded px-3 py-1"
+            >
+              <!-- Icon: Globe -->
+              <svg
+                class="icon mr-2 rtl:ml-2 rtl:mr-0 w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                ></path>
+              </svg>
+              <span id="lang-btn-text">العربية</span>
+            </button>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="md:hidden flex items-center">
+            <button
+              onclick="toggleMobileMenu()"
+              class="text-slate-600 hover:text-pronile-blue focus:outline-none p-2"
+            >
+              <!-- Icon: Menu/Bars -->
+              <svg
+                class="icon w-6 h-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Panel -->
+      <div
+        class="md:hidden hidden bg-white border-t border-slate-100"
+        id="mobile-menu"
+      >
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a
+            href="#about"
+            class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-pronile-blue hover:bg-slate-50"
+            data-key="navAbout"
+            >About Us</a
+          >
+          <a
+            href="#services"
+            class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-pronile-blue hover:bg-slate-50"
+            data-key="navServices"
+            >Sectors</a
+          >
+          <a
+            href="#values"
+            class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-pronile-blue hover:bg-slate-50"
+            data-key="navValues"
+            >Values</a
+          >
+          <a
+            href="#contact"
+            class="block px-3 py-2 rounded-md text-base font-medium text-pronile-blue font-bold"
+            data-key="navContact"
+            >Contact Us</a
+          >
+          <div class="px-3 py-2">
+            <button
+              onclick="toggleLanguage()"
+              class="w-full text-center border border-slate-300 rounded py-2 text-slate-600"
+            >
+              <span id="mobile-lang-btn-text">العربية</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header
+      class="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat bg-fixed"
+      style="
+        background-image: url(&quot;https://images.unsplash.com/photo-1579619627702-86ff5466e017?q=80&w=2070&auto=format&fit=crop&quot;);
+      "
+    >
+      <div class="absolute inset-0 hero-overlay"></div>
+
+      <div
+        class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+      >
+        <h1
+          class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight animate-fade-in-up"
+        >
+          <span data-key="heroTitle">Powering Development.</span><br />
+          <span class="text-pronile-gold" data-key="heroSubtitle"
+            >Empowering Growth.</span
+          >
+        </h1>
+        <p
+          class="mt-4 max-w-3xl mx-auto text-xl text-slate-200 mb-10"
+          data-key="heroDesc"
+        >
+          Pronile International Co. Ltd. is a leader in importing heavy
+          machinery and spare parts, supporting the region's vital development
+          sectors.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href="#services"
+            class="px-8 py-3.5 rounded-full bg-pronile-gold text-pronile-dark font-bold hover:bg-yellow-400 transition-colors shadow-lg transform hover:scale-105"
+            data-key="heroCTA1"
+          >
+            Explore Sectors
+          </a>
+          <a
+            href="#contact"
+            class="px-8 py-3.5 rounded-full bg-transparent border-2 border-white text-white font-bold hover:bg-white hover:text-pronile-blue transition-colors shadow-lg"
+            data-key="heroCTA2"
+          >
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2
+            class="text-3xl font-bold text-pronile-dark sm:text-4xl"
+            data-key="aboutTitle"
+          >
+            Who We Are
+          </h2>
+          <div class="w-24 h-1 bg-pronile-gold mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="order-2 lg:order-1">
+            <p
+              class="text-lg text-slate-600 leading-relaxed mb-6"
+              data-key="aboutText1"
+            >
+              Pronile International Co. Ltd. is a leading company specializing
+              in the import and supply of equipment, machinery, and spare parts
+              to meet the vital needs of key development sectors in the region.
+            </p>
+            <p
+              class="text-lg text-slate-600 leading-relaxed mb-6"
+              data-key="aboutText2"
+            >
+              We are committed to supporting economic growth by providing
+              high-quality technical solutions from reliable global
+              manufacturers. We believe that the continued success of our
+              clients is the foundation of our success.
+            </p>
+            <div
+              class="flex items-center space-x-4 rtl:space-x-reverse text-pronile-blue font-semibold"
+            >
+              <!-- Icon: Check Circle -->
+              <svg
+                class="icon text-pronile-gold w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span data-key="visionTag">Trusted Partner</span>
+
+              <!-- Icon: Check Circle -->
+              <svg
+                class="icon text-pronile-gold w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span data-key="qualityTag">Global Standards</span>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2 relative">
+            <img
+              src="https://images.unsplash.com/photo-1532629345422-7515f3d16335?q=80&w=2070&auto=format&fit=crop"
+              onerror="this.src='https://placehold.co/600x400/1e3a8a/FFFFFF?text=Pronile+Equipment'"
+              alt="Industrial Equipment"
+              class="rounded-lg shadow-xl w-full object-cover h-80 lg:h-96"
+            />
+            <div
+              class="absolute -bottom-6 -right-6 rtl:right-auto rtl:-left-6 w-24 h-24 bg-pronile-gold rounded-lg -z-10"
+            ></div>
+            <div
+              class="absolute -top-6 -left-6 rtl:left-auto rtl:-right-6 w-24 h-24 bg-pronile-blue rounded-lg -z-10"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2
+            class="text-3xl font-bold text-pronile-dark sm:text-4xl"
+            data-key="servicesTitle"
+          >
+            Core Business Sectors
+          </h2>
+          <p class="mt-4 text-xl text-slate-500" data-key="servicesSubtitle">
+            Strategic integrated solutions for operational excellence
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Agriculture Card -->
+          <div
+            class="service-card bg-white rounded-xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full"
+          >
+            <div class="h-48 bg-slate-200 relative">
+              <img
+                src="https://images.unsplash.com/photo-1625246333195-58197bd47d72?q=80&w=2070&auto=format&fit=crop"
+                onerror="this.src='https://placehold.co/600x400/22c55e/FFFFFF?text=Agriculture'"
+                alt="Agriculture"
+                class="w-full h-full object-cover"
+              />
+              <div
+                class="absolute top-4 right-4 rtl:right-auto rtl:left-4 bg-white p-2 rounded-full shadow-md flex items-center justify-center"
+              >
+                <!-- Icon: Wheat/Plant -->
+                <svg
+                  class="icon w-6 h-6 text-green-600"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M7 19a5 5 0 0 1-5-5V7c0-1.1.9-2 2-2h1c.55 0 1 .45 1 1v1h1c.55 0 1 .45 1 1v3"
+                  ></path>
+                  <path
+                    d="M12 19a5 5 0 0 0 5-5V7c0-1.1-.9-2-2-2h-1c-.55 0-1 .45-1 1v1h-1c-.55 0-1 .45-1 1v3"
+                  ></path>
+                  <path d="M12 22v-8"></path>
+                  <path d="M7 22v-8"></path>
+                  <path d="M17 22v-8"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="p-6 flex-grow flex flex-col">
+              <h3
+                class="text-xl font-bold text-pronile-dark mb-3"
+                data-key="agriTitle"
+              >
+                Agricultural Equipment
+              </h3>
+              <p class="text-slate-600 mb-4 flex-grow" data-key="agriDesc">
+                Supplying modern machinery such as harvesters, seeders, plows,
+                and irrigation equipment.
+              </p>
+              <div class="mt-auto pt-4 border-t border-slate-100">
+                <p
+                  class="text-sm font-semibold text-pronile-blue"
+                  data-key="agriGoal"
+                >
+                  <span
+                    class="text-slate-400 font-normal block mb-1 uppercase text-xs"
+                    data-key="goalLabel"
+                    >Goal</span
+                  >
+                  Enhancing efficiency & securing food production.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mining Card -->
+          <div
+            class="service-card bg-white rounded-xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full"
+          >
+            <div class="h-48 bg-slate-200 relative">
+              <img
+                src="https://images.unsplash.com/photo-1578326457399-3b34dbbf23b8?q=80&w=2070&auto=format&fit=crop"
+                onerror="this.src='https://placehold.co/600x400/ea580c/FFFFFF?text=Mining'"
+                alt="Mining"
+                class="w-full h-full object-cover"
+              />
+              <div
+                class="absolute top-4 right-4 rtl:right-auto rtl:left-4 bg-white p-2 rounded-full shadow-md flex items-center justify-center"
+              >
+                <!-- Icon: Diamond/Gem -->
+                <svg
+                  class="icon w-6 h-6 text-orange-600"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M6 3h12l4 6-10 13L2 9z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="p-6 flex-grow flex flex-col">
+              <h3
+                class="text-xl font-bold text-pronile-dark mb-3"
+                data-key="miningTitle"
+              >
+                Mining Equipment
+              </h3>
+              <p class="text-slate-600 mb-4 flex-grow" data-key="miningDesc">
+                Importing drilling rigs, crushers, screening devices, and
+                exploration equipment.
+              </p>
+              <div class="mt-auto pt-4 border-t border-slate-100">
+                <p
+                  class="text-sm font-semibold text-pronile-blue"
+                  data-key="miningGoal"
+                >
+                  <span
+                    class="text-slate-400 font-normal block mb-1 uppercase text-xs"
+                    data-key="goalLabel"
+                    >Goal</span
+                  >
+                  Supporting sustainable mining operations globally.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spare Parts Card -->
+          <div
+            class="service-card bg-white rounded-xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full"
+          >
+            <div class="h-48 bg-slate-200 relative">
+              <img
+                src="https://images.unsplash.com/photo-1486262715619-01b80258e0a5?q=80&w=2070&auto=format&fit=crop"
+                onerror="this.src='https://placehold.co/600x400/475569/FFFFFF?text=Spare+Parts'"
+                alt="Spare Parts"
+                class="w-full h-full object-cover"
+              />
+              <div
+                class="absolute top-4 right-4 rtl:right-auto rtl:left-4 bg-white p-2 rounded-full shadow-md flex items-center justify-center"
+              >
+                <!-- Icon: Cogs/Gears -->
+                <svg
+                  class="icon w-6 h-6 text-slate-600"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div class="p-6 flex-grow flex flex-col">
+              <h3
+                class="text-xl font-bold text-pronile-dark mb-3"
+                data-key="partsTitle"
+              >
+                Original Spare Parts (OEM)
+              </h3>
+              <p class="text-slate-600 mb-4 flex-grow" data-key="partsDesc">
+                Securing OEM parts and consumables for all imported machinery.
+              </p>
+              <div class="mt-auto pt-4 border-t border-slate-100">
+                <p
+                  class="text-sm font-semibold text-pronile-blue"
+                  data-key="partsGoal"
+                >
+                  <span
+                    class="text-slate-400 font-normal block mb-1 uppercase text-xs"
+                    data-key="goalLabel"
+                    >Goal</span
+                  >
+                  Minimizing downtime & ensuring continuity.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section
+      id="values"
+      class="py-20 bg-pronile-dark text-white relative overflow-hidden"
+    >
+      <!-- Decorative bg pattern: Factory Icon -->
+      <svg
+        class="absolute text-white/5 -top-10 -right-20 w-[300px] h-[300px]"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M22 22H2V10l7-3v2l5-2v3h3v1h2v-4h3v15zM12 10h-2V7h2v3zm4 0h-2V7h2v3z"
+        />
+      </svg>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div>
+            <h2 class="text-3xl font-bold mb-6" data-key="valueTitle">
+              Our Vision & Added Value
+            </h2>
+            <p class="text-slate-300 text-lg mb-8" data-key="valueDesc">
+              Our vision focuses on being the preferred partner in agriculture,
+              mining, and industry. We provide real added value through:
+            </p>
+            <a
+              href="#contact"
+              class="inline-block px-6 py-3 border border-pronile-gold text-pronile-gold rounded-md hover:bg-pronile-gold hover:text-pronile-dark transition-colors font-semibold"
+              data-key="valueCTA"
+              >Work With Us</a
+            >
+          </div>
+
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div
+                  class="w-12 h-12 rounded-full bg-pronile-blue flex items-center justify-center border border-slate-600"
+                >
+                  <!-- Icon: Award/Star -->
+                  <svg
+                    class="icon w-6 h-6 text-pronile-gold"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="8" r="7"></circle>
+                    <polyline
+                      points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"
+                    ></polyline>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4 rtl:ml-0 rtl:mr-4">
+                <h3 class="text-xl font-bold text-white" data-key="feat1Title">
+                  Quality & Origin
+                </h3>
+                <p class="text-slate-400 mt-2" data-key="feat1Desc">
+                  Sourcing superior quality products from major global
+                  manufacturers known for durability.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div
+                  class="w-12 h-12 rounded-full bg-pronile-blue flex items-center justify-center border border-slate-600"
+                >
+                  <!-- Icon: Headset -->
+                  <svg
+                    class="icon w-6 h-6 text-pronile-gold"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                    <path
+                      d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4 rtl:ml-0 rtl:mr-4">
+                <h3 class="text-xl font-bold text-white" data-key="feat2Title">
+                  After-Sales Service
+                </h3>
+                <p class="text-slate-400 mt-2" data-key="feat2Desc">
+                  Committed support ensuring your equipment runs efficiently
+                  long after purchase.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div
+                  class="w-12 h-12 rounded-full bg-pronile-blue flex items-center justify-center border border-slate-600"
+                >
+                  <!-- Icon: Puzzle -->
+                  <svg
+                    class="icon w-6 h-6 text-pronile-gold"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M19.439 15.424a1 1 0 0 0-1.609 1.306l.009.01a3 3 0 0 1 2.302 4.939l-.344.344a3.003 3.003 0 0 1-4.243 0l-.344-.344a1 1 0 0 0-1.306-1.609 3 3 0 0 1-4.939 2.302l-.01-.009a1 1 0 0 0-1.306 1.609l.009.01a3.004 3.004 0 0 1-2.302 4.939l.344.344a3.003 3.003 0 0 1 4.243 0l.344-.344a1 1 0 0 0 1.306 1.609 3 3 0 0 1 4.939-2.302l.01.009z"
+                    ></path>
+                    <path
+                      d="M4.561 8.576a1 1 0 0 0 1.609-1.306l-.009-.01a3 3 0 0 1-2.302-4.939l.344-.344a3.003 3.003 0 0 1 4.243 0l.344.344a1 1 0 0 0 1.306 1.609 3 3 0 0 1 4.939-2.302l.01.009a1 1 0 0 0 1.306-1.609l-.009-.01a3.004 3.004 0 0 1 2.302-4.939l-.344-.344a3.003 3.003 0 0 1-4.243 0l-.344.344a1 1 0 0 0-1.306-1.609 3 3 0 0 1-4.939 2.302l-.01-.009z"
+                    ></path>
+                    <!-- Simplified puzzle look -->
+                    <path
+                      d="M20.5 7.5a2.5 2.5 0 0 1-2.5 2.5h-1a2.5 2.5 0 0 0-2.5 2.5v1a2.5 2.5 0 0 1-2.5 2.5h-1a2.5 2.5 0 0 0-2.5 2.5v1a2.5 2.5 0 0 1-5 0"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4 rtl:ml-0 rtl:mr-4">
+                <h3 class="text-xl font-bold text-white" data-key="feat3Title">
+                  Integrated Solutions
+                </h3>
+                <p class="text-slate-400 mt-2" data-key="feat3Desc">
+                  Comprehensive solutions meeting maximum operational
+                  requirements in harsh regional conditions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      id="contact"
+      class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <!-- Company Info -->
+          <div>
+            <h3 class="text-2xl font-bold text-white mb-4">PRONILE</h3>
+            <p class="text-sm leading-relaxed mb-4" data-key="footerAbout">
+              Pronile International Co. Ltd.<br />
+              Leading the way in heavy machinery imports.
+            </p>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h4
+              class="text-lg font-bold text-white mb-4"
+              data-key="contactTitle"
+            >
+              Contact Us
+            </h4>
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <!-- Icon: Mail -->
+                <svg
+                  class="icon text-pronile-gold w-6 h-6 mr-2 rtl:mr-0 rtl:ml-2"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  ></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span>info@pronile-international.com</span>
+              </li>
+              <li class="flex items-center">
+                <!-- Icon: Phone -->
+                <svg
+                  class="icon text-pronile-gold w-6 h-6 mr-2 rtl:mr-0 rtl:ml-2"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
+                </svg>
+                <span dir="ltr">+123 456 7890</span>
+              </li>
+              <li class="flex items-center">
+                <!-- Icon: Map Pin -->
+                <svg
+                  class="icon text-pronile-gold w-6 h-6 mr-2 rtl:mr-0 rtl:ml-2"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                  ></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span data-key="addressPlaceholder"
+                  >Main Headquarters, Industrial District</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Links -->
+          <div>
+            <h4 class="text-lg font-bold text-white mb-4" data-key="quickLinks">
+              Quick Links
+            </h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#about"
+                  class="hover:text-pronile-gold transition-colors"
+                  data-key="navAbout"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="hover:text-pronile-gold transition-colors"
+                  data-key="navServices"
+                  >Sectors</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#values"
+                  class="hover:text-pronile-gold transition-colors"
+                  data-key="navValues"
+                  >Values</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500"
+        >
+          &copy;
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          Pronile International Co. Ltd.
+          <span data-key="copyright">All rights reserved.</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript for Logic -->
+    <script>
+      // Content Dictionary
+      const translations = {
+        en: {
+          companyNameShort: "PRONILE",
+          navAbout: "About Us",
+          navServices: "Sectors",
+          navValues: "Values",
+          navContact: "Contact Us",
+          heroTitle: "Powering Development.",
+          heroSubtitle: "Empowering Growth.",
+          heroDesc:
+            "Pronile International Co. Ltd. is a leader in importing heavy machinery and spare parts, supporting the region's vital development sectors.",
+          heroCTA1: "Explore Sectors",
+          heroCTA2: "Contact Us",
+          aboutTitle: "Who We Are",
+          aboutText1:
+            "Pronile International Co. Ltd. is a leading company specializing in the import and supply of equipment, machinery, and spare parts to meet the vital needs of key development sectors in the region.",
+          aboutText2:
+            "We are committed to supporting economic growth by providing high-quality technical solutions from reliable global manufacturers. We believe that the continued success of our clients is the foundation of our success.",
+          visionTag: "Trusted Partner",
+          qualityTag: "Global Standards",
+          servicesTitle: "Core Business Sectors",
+          servicesSubtitle:
+            "Strategic integrated solutions for operational excellence",
+          agriTitle: "Agricultural Equipment",
+          agriDesc:
+            "Supplying modern machinery such as harvesters, seeders, plows, and irrigation equipment.",
+          goalLabel: "Goal",
+          agriGoal: "Enhancing efficiency & securing food production.",
+          miningTitle: "Mining Equipment",
+          miningDesc:
+            "Importing drilling rigs, crushers, screening devices, and exploration equipment.",
+          miningGoal: "Supporting sustainable mining operations globally.",
+          partsTitle: "Original Spare Parts (OEM)",
+          partsDesc:
+            "Securing OEM parts and consumables for all imported machinery.",
+          partsGoal: "Minimizing downtime & ensuring continuity.",
+          valueTitle: "Our Vision & Added Value",
+          valueDesc:
+            "Our vision focuses on being the preferred partner in agriculture, mining, and industry. We provide real added value through:",
+          valueCTA: "Work With Us",
+          feat1Title: "Quality & Origin",
+          feat1Desc:
+            "Sourcing superior quality products from major global manufacturers known for durability and reliability.",
+          feat2Title: "After-Sales Service",
+          feat2Desc:
+            "Committed support ensuring your equipment runs efficiently long after purchase.",
+          feat3Title: "Integrated Solutions",
+          feat3Desc:
+            "Comprehensive solutions meeting maximum operational requirements in harsh regional conditions.",
+          footerAbout:
+            "Pronile International Co. Ltd.<br>Leading the way in heavy machinery imports.",
+          contactTitle: "Contact Us",
+          addressPlaceholder: "Main Headquarters, Industrial District",
+          quickLinks: "Quick Links",
+          copyright: "All rights reserved.",
+        },
+        ar: {
+          companyNameShort: "برونايل",
+          navAbout: "من نحن",
+          navServices: "قطاعات العمل",
+          navValues: "قيمنا",
+          navContact: "اتصل بنا",
+          heroTitle: "محرك التنمية.",
+          heroSubtitle: "نمكن النمو.",
+          heroDesc:
+            "تُعد برونايل العالمية المحدودة رائدة في استيراد المعدات الثقيلة وقطع الغيار، لتلبية الاحتياجات الحيوية لقطاعات التنمية في المنطقة.",
+          heroCTA1: "اكتشف القطاعات",
+          heroCTA2: "تواصل معنا",
+          aboutTitle: "من نحن",
+          aboutText1:
+            "تُعد برونايل العالمية المحدودة (Pronile International Co. Ltd.) من الشركات الرائدة والمتخصصة في مجال استيراد وتوريد المعدات والآليات وقطع الغيار، لتلبية الاحتياجات الحيوية لقطاعات التنمية الرئيسية في المنطقة.",
+          aboutText2:
+            "تلتزم الشركة بدعم النمو الاقتصادي من خلال توفير حلول تقنية عالية الجودة من مصنعين عالميين موثوقين. نحن نؤمن بأن استمرار نجاح عملائنا هو أساس نجاحنا.",
+          visionTag: "شريك موثوق",
+          qualityTag: "معايير عالمية",
+          servicesTitle: "محاور العمل الرئيسية",
+          servicesSubtitle: "حلول استراتيجية متكاملة لتميز تشغيلي",
+          agriTitle: "المعدات الزراعية",
+          agriDesc:
+            "توريد الآليات الزراعية الحديثة مثل الحصادات، آلات البذر والحراثة، والمعدات الخاصة بالري والإنتاج الحيواني.",
+          goalLabel: "الهدف",
+          agriGoal: "تعزيز الكفاءة والإنتاجية وتأمين الغذاء.",
+          miningTitle: "معدات التعدين",
+          miningDesc:
+            "استيراد معدات الحفر، الكسارات (Crushers)، أجهزة الفرز (Screening)، ومعدات الاستكشاف.",
+          miningGoal: "دعم عمليات التعدين وضمان استدامتها وسلامتها.",
+          partsTitle: "الاسبيرات (قطع الغيار) الأصلية",
+          partsDesc:
+            "تأمين وتوريد قطع الغيار الأصلية (OEM) والمستهلكات لجميع المعدات المستوردة.",
+          partsGoal: "ضمان استمرارية التشغيل وتقليل وقت التوقف.",
+          valueTitle: "الرؤية والقيمة المضافة",
+          valueDesc:
+            "تتمحور رؤية 'برونايل العالمية' حول أن تكون الشريك الموثوق والمفضل في قطاعات الزراعة والتعدين. نقدم قيمة مضافة عبر:",
+          valueCTA: "اعمل معنا",
+          feat1Title: "الجودة والمنشأ",
+          feat1Desc:
+            "توريد منتجات ذات جودة فائقة ومصادرها من كبرى الشركات العالمية المعروفة بالمتانة والموثوقية.",
+          feat2Title: "خدمة ما بعد البيع",
+          feat2Desc:
+            "دعم ملتزم يضمن عمل معداتك بكفاءة عالية لفترة طويلة بعد الشراء.",
+          feat3Title: "حلول متكاملة",
+          feat3Desc:
+            "تقديم حلول شاملة تلبي أقصى متطلبات التشغيل في الظروف القاسية بالمنطقة.",
+          footerAbout:
+            "برونايل العالمية المحدودة<br>الريادة في استيراد المعدات الثقيلة.",
+          contactTitle: "معلومات التواصل",
+          addressPlaceholder: "المقر الرئيسي، المنطقة الصناعية",
+          quickLinks: "روابط سريعة",
+          copyright: "جميع الحقوق محفوظة.",
+        },
+      };
+
+      let currentLang = "en";
+
+      // Function to set language
+      function setLanguage(lang) {
+        currentLang = lang;
+        const doc = document.documentElement;
+        const elements = document.querySelectorAll("[data-key]");
+
+        // Set Text Content
+        elements.forEach((el) => {
+          const key = el.getAttribute("data-key");
+          if (translations[lang][key]) {
+            if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+              el.placeholder = translations[lang][key];
+            } else {
+              el.innerHTML = translations[lang][key]; // Using innerHTML to allow <br>
+            }
+          }
+        });
+
+        // Handle Direction and Fonts
+        if (lang === "ar") {
+          doc.setAttribute("dir", "rtl");
+          doc.setAttribute("lang", "ar");
+          document.getElementById("lang-btn-text").textContent = "English";
+          document.getElementById("mobile-lang-btn-text").textContent =
+            "English";
+        } else {
+          doc.setAttribute("dir", "ltr");
+          doc.setAttribute("lang", "en");
+          document.getElementById("lang-btn-text").textContent = "العربية";
+          document.getElementById("mobile-lang-btn-text").textContent =
+            "العربية";
+        }
+      }
+
+      // Toggle function for buttons
+      function toggleLanguage() {
+        setLanguage(currentLang === "en" ? "ar" : "en");
+      }
+
+      // Initialize based on browser preference
+      function initLanguage() {
+        const userLang = navigator.language || navigator.userLanguage;
+        if (userLang.startsWith("ar")) {
+          setLanguage("ar");
+        } else {
+          setLanguage("en");
+        }
+      }
+
+      // Mobile Menu Logic
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobile-menu");
+        menu.classList.toggle("hidden");
+      }
+
+      // Run initialization
+      document.addEventListener("DOMContentLoaded", initLanguage);
+    </script>
+  </body>
+</html>
