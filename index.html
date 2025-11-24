@@ -76,9 +76,6 @@
         display: inline-block;
         width: 1em;
         height: 1em;
-        stroke-width: 0;
-        stroke: currentColor;
-        fill: currentColor;
         vertical-align: middle;
       }
     </style>
@@ -170,6 +167,13 @@
 
           <!-- Mobile menu button -->
           <div class="md:hidden flex items-center">
+            <!-- Mobile Language Toggle -->
+            <button
+              onclick="toggleLanguage()"
+              class="mr-2 rtl:mr-0 rtl:ml-2 flex items-center text-sm font-semibold text-slate-500 hover:text-pronile-blue border border-slate-300 rounded px-3 py-1"
+            >
+              <span id="mobile-lang-btn-text">العربية</span>
+            </button>
             <button
               onclick="toggleMobileMenu()"
               class="text-slate-600 hover:text-pronile-blue focus:outline-none p-2"
@@ -221,14 +225,6 @@
             data-key="navContact"
             >Contact Us</a
           >
-          <div class="px-3 py-2">
-            <button
-              onclick="toggleLanguage()"
-              class="w-full text-center border border-slate-300 rounded py-2 text-slate-600"
-            >
-              <span id="mobile-lang-btn-text">العربية</span>
-            </button>
-          </div>
         </div>
       </div>
     </nav>
