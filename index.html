@@ -146,6 +146,13 @@
             </button>
           </div>
           <div class="md:hidden flex items-center">
+            <!-- Mobile Language Toggle -->
+            <button
+              onclick="toggleLanguage()"
+              class="mr-2 rtl:mr-0 rtl:ml-2 flex items-center text-sm font-semibold text-slate-500 hover:text-pronile-blue border border-slate-300 rounded px-3 py-1"
+            >
+              <span id="mobile-lang-btn-text">العربية</span>
+            </button>
             <button
               onclick="toggleLanguage()"
               class="mr-2 rtl:mr-0 rtl:ml-2 flex items-center text-sm font-semibold text-slate-500 hover:text-pronile-blue border border-slate-300 rounded px-3 py-1"
@@ -860,6 +867,7 @@
 
       function setLanguage(lang) {
         currentLang = lang;
+        localStorage.setItem("userLang", lang);
         const doc = document.documentElement;
         const elements = document.querySelectorAll("[data-key]");
 
@@ -894,6 +902,12 @@
       }
 
       function initLanguage() {
+        const savedLang = localStorage.getItem("userLang");
+        if (savedLang) {
+          setLanguage(savedLang);
+          return;
+        }
+
         const userLang = navigator.language || navigator.userLanguage;
         if (userLang.startsWith("ar")) {
           setLanguage("ar");
